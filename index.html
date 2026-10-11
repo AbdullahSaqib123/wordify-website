@@ -5,115 +5,138 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wordify — Business English, Made Fluent</title>
 <meta name="description" content="Wordify is Pakistan's trusted online institute for Business English, Email Writing, Public Speaking and AI-powered office skills.">
+<meta name="theme-color" content="#0A2751">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
-<div class="bg-glow bg-glow-1"></div>
-<div class="bg-glow bg-glow-2"></div>
-
 <!-- ===== NAV ===== -->
-<header class="nav-wrap">
-  <nav class="nav container">
-    <a href="#home" class="nav-logo">wordify</a>
+<header class="nav-wrap" id="navWrap">
+  <nav class="nav">
+    <a href="#home" class="nav-logo" aria-label="Wordify home">wordify</a>
     <div class="nav-links" id="navLinks">
       <a href="#home" class="active">Home</a>
       <a href="#courses">Courses</a>
       <a href="#about">About</a>
       <a href="#testimonials">Testimonials</a>
       <a href="#chat">Chat</a>
+      <a href="#chat" class="nav-enroll-mobile">Enroll now</a>
     </div>
-    <a href="#chat" class="btn btn-yellow nav-enroll">Enroll now</a>
-    <button class="nav-toggle" id="navToggle" aria-label="Menu">
-      <span></span><span></span><span></span>
+    <a href="#chat" class="btn btn-yellow btn-sm nav-enroll">Enroll now <span class="arrow">&rarr;</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span>
     </button>
   </nav>
 </header>
 
 <!-- ===== HERO ===== -->
 <section class="hero" id="home">
-  <canvas class="wire-canvas hero-wire" id="heroWire"></canvas>
-  <div class="container hero-inner">
-    <div class="hero-text">
-      <p class="wordmark">wordify</p>
-      <h1>Business English,<br>made <span class="text-yellow">fluent</span>.</h1>
-      <p class="tagline">Big dreams need strong communication &amp; IT skills.</p>
-      <p class="eyebrow">BIG DREAMS NEED POWERFUL WORDS</p>
-      <div class="hero-btns">
-        <a href="#courses" class="btn btn-yellow">Courses</a>
-        <a href="#chat" class="btn btn-outline">Chat with us</a>
+  <div class="hero-bg" aria-hidden="true"></div>
+  <canvas class="wire-canvas" id="heroWire" aria-hidden="true"></canvas>
+
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="pill-label reveal"><span class="live-dot"></span> Live online classes &middot; Karachi to Khyber</p>
+      <h1 class="reveal d1">Business English,<br>made <em>fluent</em>.</h1>
+      <p class="hero-sub reveal d2">Big dreams need strong communication &amp; IT skills. Learn the English and the tools that get results at work, from client calls and emails to AI-powered Office.</p>
+      <div class="hero-actions reveal d3">
+        <a href="#courses" class="btn btn-yellow">Explore courses <span class="arrow">&rarr;</span></a>
+        <a href="#chat" class="btn btn-ghost">Chat with us</a>
       </div>
+      <ul class="hero-proof reveal d4">
+        <li><strong>10+</strong><span>years training professionals</span></li>
+        <li><strong>7</strong><span>practical, job-ready courses</span></li>
+        <li><strong>100%</strong><span>live &amp; interactive</span></li>
+      </ul>
     </div>
-    <div class="hero-visual">
-      <div class="hero-circle">
-        <img src="images/hero-team.jpg" alt="Team communicating and working on laptops">
+
+    <div class="hero-visual reveal d2">
+      <div class="arch">
+        <img src="images/hero-team.jpg" alt="Team communicating and working on laptops" fetchpriority="high">
       </div>
-      <div class="float-chip chip-1"><span class="dot"></span> Live online classes</div>
-      <div class="float-chip chip-2">10+ years of training</div>
+      <div class="glass-card gc-1">
+        <span class="gc-icon">&#9679;</span>
+        <div><strong>Placement test</strong><span>Start at exactly your level</span></div>
+      </div>
+      <div class="glass-card gc-2">
+        <div><strong>Beginner &rarr; Advanced</strong><span>Taught level by level</span></div>
+      </div>
     </div>
   </div>
+
+  <a href="#courses" class="scroll-hint" aria-label="Scroll to courses"><span></span></a>
 </section>
+
+<!-- ===== MARQUEE ===== -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Business English</span><i></i><span>Email Writing</span><i></i><span>Public Speaking</span><i></i><span>Basic English</span><i></i><span>MS Office with AI</span><i></i><span>Digital Marketing with AI</span><i></i><span>Canva</span><i></i>
+    <span>Business English</span><i></i><span>Email Writing</span><i></i><span>Public Speaking</span><i></i><span>Basic English</span><i></i><span>MS Office with AI</span><i></i><span>Digital Marketing with AI</span><i></i><span>Canva</span><i></i>
+  </div>
+</div>
 
 <!-- ===== COURSES ===== -->
 <section class="courses" id="courses">
-  <div class="container">
-    <div class="section-head">
-      <p class="kicker">What you'll learn</p>
-      <h2>Pick a course, see how it helps you</h2>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow-label">01 &mdash; Courses</p>
+      <h2>Skills that show up <em>in your work</em>, the very next day.</h2>
     </div>
 
-    <div class="course-panel">
-      <div class="course-pills" id="coursePills"></div>
-      <div class="course-body">
-        <div class="course-circle">
-          <img id="courseImg" src="" alt="">
+    <div class="course-layout">
+      <ol class="course-nav reveal" id="courseNav"></ol>
+
+      <article class="course-card reveal d1" id="courseCard">
+        <div class="course-media">
+          <img id="courseImg" src="images/business-english.jpg" alt="">
+          <div class="course-count" id="courseCount">01 / 07</div>
         </div>
-        <div class="course-detail" id="courseDetail">
+        <div class="course-info">
           <h3 id="courseTitle"></h3>
           <p class="course-hook" id="courseDesc"></p>
           <p class="course-summary" id="courseSummary"></p>
-          <ul class="course-list" id="courseList"></ul>
+          <ul class="course-bullets" id="courseBullets"></ul>
           <div class="course-meta" id="courseMeta"></div>
-          <p class="course-note">Placement test on joining &middot; Beginner to Advanced</p>
-          <div class="course-panel-btns">
-            <a href="#about" class="btn btn-outline btn-sm">About</a>
-            <a href="#chat" class="btn btn-yellow btn-sm">Chat now</a>
+          <div class="course-actions">
+            <a href="#chat" class="btn btn-yellow btn-sm">Chat now <span class="arrow">&rarr;</span></a>
+            <a href="#about" class="btn btn-ghost btn-sm">About Wordify</a>
           </div>
+          <p class="course-note">Placement test on joining &middot; Beginner to Advanced</p>
         </div>
-      </div>
+      </article>
     </div>
-
-    <div class="course-grid" id="courseGrid"></div>
   </div>
 </section>
 
 <!-- ===== ABOUT ===== -->
 <section class="about" id="about">
-  <div class="container about-inner">
-    <div class="about-media">
-      <div class="about-photo">
-        <img src="images/about-team.jpg" alt="Smiling Wordify learners working together">
-      </div>
-      <div class="about-photo about-photo-small">
-        <img src="images/about-study.jpg" alt="Learner studying online">
-      </div>
+  <div class="wrap about-grid">
+    <div class="about-media reveal">
+      <div class="am-main"><img src="images/about-team.jpg" alt="Smiling Wordify learners working together" loading="lazy"></div>
+      <div class="am-small"><img src="images/about-study.jpg" alt="Learner studying online" loading="lazy"></div>
+      <div class="am-badge"><strong>10+</strong><span>years of<br>trusted training</span></div>
     </div>
-    <div class="about-panel">
-      <div class="course-pills" id="aboutPills"></div>
-      <div class="course-detail" id="aboutDetail">
-        <p id="aboutText"></p>
-        <div class="stats">
-          <div><strong>10+</strong><span>Years of training</span></div>
-          <div><strong>100%</strong><span>Live online classes</span></div>
-          <div><strong>Pan-Pakistan</strong><span>Karachi to Khyber</span></div>
-        </div>
-        <div class="course-panel-btns">
-          <a href="#courses" class="btn btn-outline btn-sm">See courses</a>
-          <a href="#chat" class="btn btn-yellow btn-sm">Chat now</a>
-        </div>
+
+    <div class="about-copy reveal d1">
+      <p class="eyebrow-label">02 &mdash; About</p>
+      <h2>Pakistan's trusted place to <em>speak with confidence</em>.</h2>
+
+      <div class="tabs" id="aboutTabs" role="tablist"></div>
+      <p class="about-text" id="aboutText"></p>
+
+      <div class="stats">
+        <div><strong>10+</strong><span>Years of training</span></div>
+        <div><strong>100%</strong><span>Live online</span></div>
+        <div><strong>PK</strong><span>Karachi to Khyber</span></div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#courses" class="btn btn-ghost btn-sm">See courses</a>
+        <a href="#chat" class="btn btn-yellow btn-sm">Chat now <span class="arrow">&rarr;</span></a>
       </div>
     </div>
   </div>
@@ -121,41 +144,65 @@
 
 <!-- ===== TESTIMONIALS ===== -->
 <section class="testimonials" id="testimonials">
-  <div class="container">
-    <div class="section-head">
-      <p class="kicker">Real learners, real results</p>
-      <h2>Testimonials</h2>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow-label">03 &mdash; Testimonials</p>
+      <h2>Real learners. <em>Real results.</em></h2>
     </div>
+
     <div class="testi-grid">
-      <div class="testi-card">
+      <figure class="testi reveal">
         <div class="testi-video" style="--thumb:url('images/testimonial-1.jpg')">
-          <span class="play-btn" aria-hidden="true">&#9658;</span>
+          <button class="play" aria-label="Play video"><span>&#9654;</span></button>
+          <span class="testi-tag">Video testimonial</span>
         </div>
-        <p class="testi-quote">"I am an Assistant Manager at a Pharmaceutical Company. I have improved a lot with Wordify."</p>
-      </div>
-      <div class="testi-card">
+        <figcaption>
+          <blockquote>&ldquo;I have improved a lot with Wordify.&rdquo;</blockquote>
+          <p><strong>Assistant Manager</strong> &middot; Pharmaceutical Company</p>
+        </figcaption>
+      </figure>
+
+      <figure class="testi reveal d1">
         <div class="testi-video" style="--thumb:url('images/testimonial-2.jpg')">
-          <span class="play-btn" aria-hidden="true">&#9658;</span>
+          <button class="play" aria-label="Play video"><span>&#9654;</span></button>
+          <span class="testi-tag">Video testimonial</span>
         </div>
-        <p class="testi-quote">"My emails are clearer and I feel confident in every meeting now." <span class="muted">(sample text, replace with real video)</span></p>
+        <figcaption>
+          <blockquote>&ldquo;My emails are clearer and I feel confident in every meeting.&rdquo;</blockquote>
+          <p><strong>Learner name</strong> &middot; Role, Company <span class="muted">(sample, replace with real video)</span></p>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta" id="chat">
+  <div class="wrap">
+    <div class="cta-panel reveal">
+      <div class="cta-glow" aria-hidden="true"></div>
+      <p class="eyebrow-label">04 &mdash; Chat</p>
+      <h2>Ready to speak with <em>confidence</em>?</h2>
+      <p class="cta-sub">Message us on WhatsApp or enroll in a course. Our team replies fast and helps you pick the right level.</p>
+      <div class="hero-actions center">
+        <a href="https://wa.me/923000000000" target="_blank" rel="noopener" class="btn btn-yellow">Chat on WhatsApp <span class="arrow">&rarr;</span></a>
+        <a href="#courses" class="btn btn-ghost">Browse courses</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== CHAT / CTA ===== -->
-<footer class="chat" id="chat">
-  <div class="container chat-inner">
-    <h2>Ready to speak with confidence?</h2>
-    <p>Message us on WhatsApp or enroll in a course &mdash; our team replies fast.</p>
-    <div class="hero-btns">
-      <a href="https://wa.me/923000000000" target="_blank" rel="noopener" class="btn btn-yellow">Chat on WhatsApp</a>
-      <a href="#courses" class="btn btn-outline">Browse courses</a>
-    </div>
-    <div class="foot-bottom">
-      <span class="nav-logo small">wordify</span>
-      <p>&copy; <span id="year"></span> Wordify. All rights reserved.</p>
-    </div>
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <a href="#home" class="nav-logo">wordify</a>
+    <nav class="footer-links">
+      <a href="#courses">Courses</a>
+      <a href="#about">About</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#chat">Chat</a>
+    </nav>
+    <p>&copy; <span id="year"></span> Wordify. Big dreams need powerful words.</p>
   </div>
 </footer>
 

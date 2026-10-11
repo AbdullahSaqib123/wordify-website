@@ -13,7 +13,7 @@ const courses = [
     img: "images/email-writing.jpg",
     desc: "Emails unclear? Write concise, professional messages that get responses.",
     summary: "Learn to structure emails so people read them and reply. From short follow-ups to formal complaints and proposals.",
-    points: ["Clear subject lines and openings", "Polite, firm and persuasive tone", "Follow-ups, requests and complaints", "Proofreading and templates you can reuse"],
+    points: ["Clear subject lines and openings", "Polite, firm and persuasive tone", "Follow-ups, requests and complaints", "Proofreading and reusable templates"],
     meta: ["6 weeks", "2 live classes / week", "Intermediate"]
   },
   {
@@ -73,123 +73,154 @@ const aboutTabs = [
   }
 ];
 
+const pad = n => String(n).padStart(2, "0");
+
 // ---------- Courses ----------
-const coursePillsEl = document.getElementById("coursePills");
-const courseGridEl = document.getElementById("courseGrid");
-const courseImgEl = document.getElementById("courseImg");
+const courseNav = document.getElementById("courseNav");
+const courseImg = document.getElementById("courseImg");
+const courseMedia = courseImg.parentElement;
 
-function renderCourseUI(i){
-  const c = courses[i];
-  coursePillsEl.innerHTML = "";
-  courseGridEl.innerHTML = "";
-
-  courses.forEach((item, idx) => {
-    const pill = document.createElement("button");
-    pill.className = "pill" + (idx === i ? " active" : "");
-    pill.textContent = item.name;
-    pill.addEventListener("click", () => renderCourseUI(idx));
-    coursePillsEl.appendChild(pill);
-
-    const card = document.createElement("div");
-    card.className = "course-card" + (idx === i ? " active" : "");
-    card.innerHTML = `<img src="${item.img}" alt="${item.name}" loading="lazy"><div class="cc-body"><h4>${item.name}</h4><p>${item.desc}</p></div>`;
-    card.addEventListener("click", () => {
-      renderCourseUI(idx);
-      document.getElementById("courses").scrollIntoView({ behavior: "smooth" });
-    });
-    courseGridEl.appendChild(card);
-  });
-
-  courseImgEl.src = c.img;
-  courseImgEl.alt = c.name;
-  document.getElementById("courseTitle").textContent = c.name;
-  document.getElementById("courseDesc").textContent = c.desc;
-  document.getElementById("courseSummary").textContent = c.summary;
-  document.getElementById("courseList").innerHTML = c.points.map(p => `<li>${p}</li>`).join("");
-  document.getElementById("courseMeta").innerHTML = c.meta.map(m => `<span>${m}</span>`).join("");
+function buildCourseNav(){
+  courseNav.innerHTML = courses.map((c, i) => `
+    <li><button class="cn-btn" data-i="${i}">
+      <span class="cn-num">${pad(i + 1)}</span>
+      <span class="cn-name">${c.name}</span>
+      <span class="cn-arrow">&rarr;</span>
+    </button></li>`).join("");
+  courseNav.querySelectorAll(".cn-btn").forEach(b =>
+    b.addEventListener("click", () => selectCourse(+b.dataset.i)));
 }
-renderCourseUI(0);
+
+function selectCourse(i, first){
+  const c = courses[i];
+  courseNav.querySelectorAll(".cn-btn").forEach((b, idx) => b.classList.toggle("active", idx === i));
+
+  const apply = () => {
+    courseImg.src = c.img;
+    courseImg.alt = c.name;
+    document.getElementById("courseTitle").textContent = c.name;
+    document.getElementById("courseDesc").textContent = c.desc;
+    document.getElementById("courseSummary").textContent = c.summary;
+    document.getElementById("courseBullets").innerHTML = c.points.map(p => `<li>${p}</li>`).join("");
+    document.getElementById("courseMeta").innerHTML = c.meta.map(m => `<span>${m}</span>`).join("");
+    document.getElementById("courseCount").textContent = `${pad(i + 1)} / ${pad(courses.length)}`;
+    courseMedia.classList.remove("swap");
+  };
+
+  if (first) return apply();
+  courseMedia.classList.add("swap");
+  setTimeout(apply, 220);
+}
+buildCourseNav();
+selectCourse(0, true);
 
 // ---------- About tabs ----------
-const aboutPillsEl = document.getElementById("aboutPills");
-function renderAboutUI(i){
-  aboutPillsEl.innerHTML = "";
-  aboutTabs.forEach((t, idx) => {
-    const pill = document.createElement("button");
-    pill.className = "pill" + (idx === i ? " active" : "");
-    pill.textContent = t.name;
-    pill.addEventListener("click", () => renderAboutUI(idx));
-    aboutPillsEl.appendChild(pill);
-  });
+const aboutTabsEl = document.getElementById("aboutTabs");
+function renderAbout(i){
+  aboutTabsEl.innerHTML = aboutTabs.map((t, idx) =>
+    `<button class="tab${idx === i ? " active" : ""}" role="tab" data-i="${idx}">${t.name}</button>`).join("");
+  aboutTabsEl.querySelectorAll(".tab").forEach(b => b.addEventListener("click", () => renderAbout(+b.dataset.i)));
   document.getElementById("aboutText").textContent = aboutTabs[i].text;
 }
-renderAboutUI(0);
+renderAbout(0);
 
 // ---------- Nav ----------
+const navWrap = document.getElementById("navWrap");
 const navToggle = document.getElementById("navToggle");
 const navLinks = document.getElementById("navLinks");
-navToggle.addEventListener("click", () => navLinks.classList.toggle("open"));
-navLinks.querySelectorAll("a").forEach(a => a.addEventListener("click", () => navLinks.classList.remove("open")));
+navToggle.addEventListener("click", () => {
+  const open = navLinks.classList.toggle("open");
+  navToggle.setAttribute("aria-expanded", open);
+});
+navLinks.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+  navLinks.classList.remove("open");
+  navToggle.setAttribute("aria-expanded", false);
+}));
 
-const sections = document.querySelectorAll("section[id], footer[id]");
-const navAnchors = document.querySelectorAll(".nav-links a");
-window.addEventListener("scroll", () => {
+const spyTargets = ["home", "courses", "about", "testimonials", "chat"]
+  .map(id => document.getElementById(id)).filter(Boolean);
+const spyLinks = navLinks.querySelectorAll("a:not(.nav-enroll-mobile)");
+function onScroll(){
+  navWrap.classList.toggle("scrolled", window.scrollY > 30);
   let current = "home";
-  sections.forEach(sec => { if (window.scrollY >= sec.offsetTop - 160) current = sec.id; });
-  navAnchors.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + current));
-}, { passive: true });
+  spyTargets.forEach(sec => { if (window.scrollY >= sec.offsetTop - 220) current = sec.id; });
+  spyLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + current));
+}
+window.addEventListener("scroll", onScroll, { passive: true });
+onScroll();
 
 document.getElementById("year").textContent = new Date().getFullYear();
+
+// ---------- Scroll reveal ----------
+const revealEls = document.querySelectorAll(".reveal");
+if ("IntersectionObserver" in window){
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+  revealEls.forEach(el => io.observe(el));
+} else {
+  revealEls.forEach(el => el.classList.add("in"));
+}
 
 // ---------- Wireframe sphere (hero) ----------
 (function initWireSphere(){
   const canvas = document.getElementById("heroWire");
   if (!canvas) return;
   const ctx = canvas.getContext("2d");
-  const dotCount = 26, speed = 0.004;
-  let w, h, radius, angle = 0;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const dotCount = 26;
+  let size, radius, angle = 0;
   const dots = [];
 
   function resize(){
-    w = canvas.width = canvas.offsetWidth;
-    h = canvas.height = canvas.offsetHeight;
-    radius = Math.min(w, h) * 0.42;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    size = canvas.offsetWidth;
+    canvas.width = canvas.height = size * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    radius = size * 0.4;
   }
   for (let i = 0; i < dotCount; i++){
     const t = i / (dotCount - 1);
-    dots.push({ theta: t * Math.PI * 3.2, phi: Math.PI * (0.15 + t * 0.7) });
+    dots.push({ theta: t * Math.PI * 3.2, phi: Math.PI * (0.12 + t * 0.76) });
   }
 
-  function frame(){
-    ctx.clearRect(0, 0, w, h);
-    const cx = w * 0.55, cy = h * 0.5;
-    ctx.strokeStyle = "rgba(255,255,255,0.2)";
+  function draw(){
+    ctx.clearRect(0, 0, size, size);
+    const c = size / 2;
+    ctx.strokeStyle = "rgba(160,195,255,0.22)";
     ctx.lineWidth = 1;
     for (let i = 0; i <= 10; i++){
       const ry = radius - (i / 10) * radius * 2;
       const rx = Math.sqrt(Math.max(radius * radius - ry * ry, 0));
       ctx.beginPath();
-      ctx.ellipse(cx, cy, rx, rx * 0.34, 0, 0, Math.PI * 2);
+      ctx.ellipse(c, c + ry * 0.0, rx, rx * 0.34, 0, 0, Math.PI * 2);
       ctx.stroke();
     }
     for (let i = 0; i < 12; i++){
       const a = (i / 12) * Math.PI + angle * 0.3;
       ctx.beginPath();
-      ctx.ellipse(cx, cy, radius * Math.abs(Math.sin(a)) + 0.001, radius, 0, 0, Math.PI * 2);
+      ctx.ellipse(c, c, radius * Math.abs(Math.sin(a)) + 0.001, radius, 0, 0, Math.PI * 2);
       ctx.stroke();
     }
     dots.forEach(d => {
       const th = d.theta + angle;
-      const x = cx + radius * Math.sin(d.phi) * Math.cos(th);
-      const y = cy - radius * Math.cos(d.phi) * 0.9 + radius * Math.sin(d.phi) * Math.sin(th) * 0.25;
+      const x = c + radius * Math.sin(d.phi) * Math.cos(th);
+      const y = c - radius * Math.cos(d.phi) * 0.9 + radius * Math.sin(d.phi) * Math.sin(th) * 0.25;
       const s = 0.5 + 0.5 * Math.sin(th);
       ctx.beginPath();
-      ctx.arc(x, y, 3.2 * Math.max(s, 0.4), 0, Math.PI * 2);
+      ctx.arc(x, y, 3.4 * Math.max(s, 0.4), 0, Math.PI * 2);
       ctx.fillStyle = "#ffcf00";
+      ctx.shadowColor = "rgba(255,207,0,.8)";
+      ctx.shadowBlur = 10;
       ctx.fill();
+      ctx.shadowBlur = 0;
     });
-    angle += speed;
-    requestAnimationFrame(frame);
+  }
+
+  function frame(){
+    draw();
+    angle += 0.004;
+    if (!reduce) requestAnimationFrame(frame);
   }
   resize();
   window.addEventListener("resize", resize);
