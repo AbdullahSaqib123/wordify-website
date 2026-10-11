@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wordify — Business English, Made Fluent</title>
+<meta name="description" content="Wordify is Pakistan's trusted online institute for Business English, Email Writing, Public Speaking and AI-powered office skills.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<header class="nav-wrap">
+  <nav class="nav container">
+    <a href="#home" class="nav-logo">wordify</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#home" class="active">Home</a>
+      <a href="#courses">Courses</a>
+      <a href="#about">About</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#chat">Chat</a>
+    </div>
+    <a href="#chat" class="btn btn-yellow nav-enroll">Enroll now</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <canvas class="wire-canvas hero-wire" id="heroWire"></canvas>
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <p class="wordmark">wordify</p>
+      <h1>Business English,<br>made <span class="text-yellow">fluent</span>.</h1>
+      <p class="eyebrow">BIG DREAMS NEED POWERFUL WORDS</p>
+      <div class="hero-btns">
+        <a href="#courses" class="btn btn-yellow">Courses</a>
+        <a href="#chat" class="btn btn-outline">Chat with us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COURSES ===== -->
+<section class="courses" id="courses">
+  <canvas class="wire-canvas courses-wire" id="coursesWire"></canvas>
+  <div class="container">
+    <div class="section-head">
+      <p class="kicker">What you'll learn</p>
+      <h2>Pick a course, see how it helps you</h2>
+    </div>
+
+    <div class="course-panel">
+      <div class="course-pills" id="coursePills"></div>
+      <div class="course-detail" id="courseDetail">
+        <h3 id="courseTitle"></h3>
+        <p id="courseDesc"></p>
+        <p class="course-note">Placement test on joining &middot; Beginner to Advanced</p>
+        <div class="course-panel-btns">
+          <a href="#about" class="btn btn-outline btn-sm">About</a>
+          <a href="#chat" class="btn btn-yellow btn-sm">Chat now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-grid" id="courseGrid"></div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about">
+  <canvas class="wire-canvas about-wire" id="aboutWire"></canvas>
+  <div class="container about-inner">
+    <div class="about-panel">
+      <div class="course-pills" id="aboutPills"></div>
+      <div class="course-detail" id="aboutDetail">
+        <p id="aboutText"></p>
+        <div class="course-panel-btns">
+          <a href="#courses" class="btn btn-outline btn-sm">See courses</a>
+          <a href="#chat" class="btn btn-yellow btn-sm">Chat now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-head">
+      <p class="kicker">Real learners, real results</p>
+      <h2>Testimonials</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-video">
+          <span class="play-btn" aria-hidden="true">&#9658;</span>
+        </div>
+        <p class="testi-quote">"I am an Assistant Manager at a Pharmaceutical Company. I have improved a lot with Wordify."</p>
+      </div>
+      <div class="testi-card">
+        <div class="testi-video">
+          <span class="play-btn" aria-hidden="true">&#9658;</span>
+        </div>
+        <p class="testi-quote">Video 2 — add your next learner's story here.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHAT / CTA ===== -->
+<footer class="chat" id="chat">
+  <div class="container chat-inner">
+    <h2>Ready to speak with confidence?</h2>
+    <p>Message us on WhatsApp or enroll in a course &mdash; our team replies fast.</p>
+    <div class="hero-btns">
+      <a href="https://wa.me/923000000000" target="_blank" rel="noopener" class="btn btn-yellow">Chat on WhatsApp</a>
+      <a href="#courses" class="btn btn-outline">Browse courses</a>
+    </div>
+    <div class="foot-bottom">
+      <span class="nav-logo small">wordify</span>
+      <p>&copy; <span id="year"></span> Wordify. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
